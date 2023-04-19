@@ -12,7 +12,7 @@ export const createValueSeries = (name, root, mainPanel, xAxis, yAxis, data) => 
         valueSeries.bullets.push(function () {
             const bulletCircle = am5.Circle.new(root, {
                 radius: 5,
-                fill: valueSeries.get("stroke"),
+                fill: valueSeries.get("fill"),
                 fillOpacity: 0.8
             }, circleTemplate)
 

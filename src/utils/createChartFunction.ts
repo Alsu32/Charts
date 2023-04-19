@@ -60,7 +60,7 @@ export const createSeries = (name, root, xAxis, yAxis) => {
         yAxis: yAxis,
         tooltip: am5.Tooltip.new(root, {
             pointerOrientation: "horizontal",
-            labelText: "[bold]{name}[/]\n{valueX.formatDate()}: [bold]{valueY}"
+            labelText: "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}"
         }),
         legendLabelText: "Series: {name}",
         legendRangeLabelText: "Series: {name}",
@@ -75,7 +75,7 @@ export const createSeries = (name, root, xAxis, yAxis) => {
             yAxis: yAxis,
             tooltip: am5.Tooltip.new(root, {
                 pointerOrientation: "horizontal",
-                labelText: "[bold]{name}[/]\n{valueX.formatDate()}: [bold]{valueY}"
+                labelText: "[bold]{name}[/]\n{valueX.formatDate()}: {valueY}"
             }),
             legendLabelText: "Series: {name}",
             legendRangeLabelText: "Series: {name}"
@@ -103,11 +103,5 @@ export const addCursor = (mainPanel, root, xAxis, yAxis, valueSeries) => {
 
 
 
-// Add a stock legend
-/*let valueLegend = createValueLegend(mainPanel, chartRoot.current, stockChart)
-valueLegend.data.setAll([valueSeries])*/
-
-// Add ScrollBar
-/*createScrollbarChart(chartRoot.current, mainPanel, data, stockChart, chartType)*/
 
 
