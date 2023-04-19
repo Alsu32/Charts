@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
-import Button from "../Button";
+import Button from "../components/Button";
+import Select from "../components/Select";
 import Chart from "./Chart";
 import styles from "./Charts.module.css"
 
@@ -47,7 +48,7 @@ let dataJson = `{
             },
             {
                 "dt": "2023-01-02T18:09:22.464Z",
-                "value": 41.0
+                "value": 45
             },
             {
                 "dt": "2023-02-02T18:09:22.464Z",
@@ -67,22 +68,23 @@ let dataJson = `{
 
 const ChartContainer = () => {
 
+    // Define chart type
     const[chartType, setChartType] = useState<string>("Line")
+    let chartTypes = ["Line", "Column", "Dot"]
+
+
+
     // Define source data
+    let data = JSON.parse(dataJson)
     let minDt: formatMinMaxDtType = new Date(2022, 1, 1)
     let maxDt: formatMinMaxDtType = null
 
-    let chartTypes = ["Line", "Column", "Dot"]
-
-    let data = JSON.parse(dataJson)
-
 
     const onClickButtonHandler = (value: string) => {
-        /* value === "1x" && heightChart === "100vh"*/
-    }
 
-    const onChangeSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        setChartType(e.target.value)
+    }
+    const onChangeChartType = (type: string) => {
+        setChartType(type)
     }
 
     return (
@@ -98,15 +100,13 @@ const ChartContainer = () => {
                 <Button value={"0.25x"} onClick={onClickButtonHandler}/>
             </div>
             <div>
-                <select onChange={onChangeSelectHandler}>
-                    {chartTypes.map(t => <option key={t} value={t}>{t}</option>)}
-                </select>
+                <Select value={chartTypes} onChange={onChangeChartType}/>
             </div>
         </div>
     )
 }
 
-export default ChartContainer;
+export default ChartContainer
 
 //types
 
@@ -116,7 +116,7 @@ type dataMetrictsType = {
 }
 type dataMetricType = {
     dt: string
-    value: number
+    value: number | null
 }
 type chartType = "Line" | "Column" | "Dot"
 

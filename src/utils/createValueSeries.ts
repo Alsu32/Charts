@@ -9,10 +9,10 @@ export const createValueSeries = (name, root, mainPanel, xAxis, yAxis, data) => 
     if (name === "Dot") {
         valueSeries.strokes.template.set("visible", false)
         let circleTemplate: am5.Template<am5.Circle> = am5.Template.new({})
-        valueSeries.bullets.push(function() {
+        valueSeries.bullets.push(function () {
             const bulletCircle = am5.Circle.new(root, {
                 radius: 5,
-                fill: valueSeries.get("fill"),
+                fill: valueSeries.get("stroke"),
                 fillOpacity: 0.8
             }, circleTemplate)
 
@@ -21,7 +21,6 @@ export const createValueSeries = (name, root, mainPanel, xAxis, yAxis, data) => 
             })
         })
     }
-
     // Formatting date
     valueSeries.data.processor = am5.DataProcessor.new(root, dateFormat)
     // Set data to valueSeries

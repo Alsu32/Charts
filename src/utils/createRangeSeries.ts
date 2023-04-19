@@ -15,7 +15,7 @@ export const createRangeSeries = (valueSeries, valueAxis, name) => {
         strokeDasharray: [2, 2]
     })
 
-    if (name === "Line") {
+    if (name === "Line" || name === "Dot") {
         range.strokes.template.setAll({
             stroke: am5.color(0xff621f)
         })
@@ -26,11 +26,6 @@ export const createRangeSeries = (valueSeries, valueAxis, name) => {
             stroke: am5.color(0xff621f)
         })
     }
-    if (name === "Dot") {
-        range.strokes.template.setAll({
-            fill: am5.color(0xff621f),
-            stroke: am5.color(0xff621f)
-        })
-    }
+
 }
 

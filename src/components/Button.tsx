@@ -13,7 +13,7 @@ const Button = ({value, onClick}:ButtonPropsType) => {
 
     return (
         <button onClick={onClickButtonHandler}>{value}</button>
-    );
-};
+    )
+}
 
-export default Button;
+export default Button

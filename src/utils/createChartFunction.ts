@@ -23,35 +23,29 @@ export let createMainPanel = (root, stockChart) => {
 }
 
 // Setting
-export const baseIntervalXAxis = {timeUnit: "day", count: 1}
+export const baseIntervalXAxis = (baseTimeInterval: string) => ({timeUnit: baseTimeInterval, count: 1})
 export const dateFormat = {
     dateFields: "dt",
     dateFormat: "YYYY-MM-DDTHH:mm:ss.sssZ"
 }
-// @ts-ignore
-const tooltip = (root) => {
-    return am5.Tooltip.new(root, {})
-}
-
 
 // Create xAxis and yAxis
 // @ts-ignore
 export const createValueAxis = (root, mainPanel) => {
     return mainPanel.yAxes.push(am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {pan: "zoom"}),
-        tooltip: tooltip(root),
+        tooltip: am5.Tooltip.new(root, {}),
         extraTooltipPrecision: 1
     }))
 }
 // @ts-ignore
-export const createDateAxis = (root, mainPanel, minDt, maxDt) => {
+export const createDateAxis = (root, mainPanel, baseTimeInterval, minDt, maxDt) => {
     return mainPanel.xAxes.push(am5xy.DateAxis.new(root, {
-        baseInterval: baseIntervalXAxis,
-        /*groupData: true,*/
+        baseInterval: baseIntervalXAxis(baseTimeInterval),
         min: minDt?.getTime(),
         max: maxDt?.getTime(),
         renderer: am5xy.AxisRendererX.new(root, {}),
-        tooltip: tooltip(root)
+        tooltip: am5.Tooltip.new(root, {})
     }))
 }
 
@@ -64,6 +58,10 @@ export const createSeries = (name, root, xAxis, yAxis) => {
         valueYField: "value",
         xAxis: xAxis,
         yAxis: yAxis,
+        tooltip: am5.Tooltip.new(root, {
+            pointerOrientation: "horizontal",
+            labelText: "[bold]{name}[/]\n{valueX.formatDate()}: [bold]{valueY}"
+        }),
         legendLabelText: "Series: {name}",
         legendRangeLabelText: "Series: {name}",
         seriesTooltipTarget: "bullet"
@@ -75,7 +73,10 @@ export const createSeries = (name, root, xAxis, yAxis) => {
             valueYField: "value",
             xAxis: xAxis,
             yAxis: yAxis,
-            tooltip: tooltip(root),
+            tooltip: am5.Tooltip.new(root, {
+                pointerOrientation: "horizontal",
+                labelText: "[bold]{name}[/]\n{valueX.formatDate()}: [bold]{valueY}"
+            }),
             legendLabelText: "Series: {name}",
             legendRangeLabelText: "Series: {name}"
 
